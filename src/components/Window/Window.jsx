@@ -5,7 +5,12 @@ import * as S from './Window.style';
 
 const Window = ({ id, height, width, style }) => (
   <>
-    <S.WindowContainer height={height} width={width} style={style}>
+    <S.WindowContainer
+      id={`${id}-parent`}
+      height={height}
+      width={width}
+      style={style}
+    >
       <S.Window id={id} />
     </S.WindowContainer>
     <S.Border />
