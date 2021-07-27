@@ -19,7 +19,7 @@ export const WindowContainer = styled.div`
   }
 
   @media only screen and (min-width: 768px) {
-    font-size: 1rem;
+    font-size: 0.9rem;
     line-height: 1.3rem;
 
     &::-webkit-scrollbar {
