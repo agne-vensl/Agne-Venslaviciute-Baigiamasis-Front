@@ -5,6 +5,9 @@ import { telnetCodes, codes } from '../utils/telnetInternals';
 
 export const WebsocketContext = createContext();
 
+const MAX_RETRIES = 4;
+
+let retries = 0;
 let incoming = false;
 let buffer = '';
 
@@ -95,19 +98,30 @@ const WebsocketProvider = ({ children }) => {
     socket.addEventListener('open', () => {
       displayOutput(window, '<=== Connected to server ===>');
       displayOutput(window);
+
+      retries = 0;
     });
 
     socket.addEventListener('close', () => {
       displayOutput(window);
       displayOutput(window, '<=== Disconnected from server ===>');
 
-      setTimeout(() => {
-        socket = connect(window);
-      }, 100);
+      if (retries <= MAX_RETRIES) {
+        setTimeout(() => {
+          socket = connect(window);
+        }, 100);
+      }
     });
 
-    socket.addEventListener('error', (event) => {
-      console.log(event);
+    socket.addEventListener('error', () => {
+      if (retries >= MAX_RETRIES) {
+        displayOutput(
+          window,
+          'The may be down or the network you are connecting from may be blocking the required port.',
+        );
+      }
+
+      retries += 1;
     });
 
     socket.addEventListener('message', async (event) => {
