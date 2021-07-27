@@ -89,7 +89,7 @@ const WebsocketProvider = ({ children }) => {
   };
 
   const connect = (window) => {
-    const socket = new WebSocket(process.env.REACT_APP_URL);
+    let socket = new WebSocket(process.env.REACT_APP_URL);
     socket.binaryType = 'arraybuffer';
 
     socket.addEventListener('open', () => {
@@ -100,6 +100,10 @@ const WebsocketProvider = ({ children }) => {
     socket.addEventListener('close', () => {
       displayOutput(window);
       displayOutput(window, '<=== Disconnected from server ===>');
+
+      setTimeout(() => {
+        socket = connect(window);
+      }, 100);
     });
 
     socket.addEventListener('error', (event) => {
