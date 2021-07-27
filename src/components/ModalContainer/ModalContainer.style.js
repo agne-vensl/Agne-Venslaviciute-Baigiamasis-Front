@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-// import Modal from 'react-modal';
 
 export const ModalOverlay = styled.div`
   background: #191818ba;
@@ -21,6 +20,7 @@ export const ModalOverlay = styled.div`
 `;
 
 export const ModalContent = styled.div`
+  align-items: center;
   background: #292727;
   border: 0;
   border-radius: 1rem;
@@ -28,16 +28,27 @@ export const ModalContent = styled.div`
   box-shadow: 0.25rem 0.25rem 0.75rem -0.25rem #151414;
   color: #eee;
   height: 90vh;
+  min-height: fit-content;
   left: 50%;
-  max-height: 99vh;
   max-width: 99%;
   outline: none;
+  overflow-y: scroll;
+  padding: 2rem;
   position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);
   width: ${(props) => props.width};
 
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  & > * {
+    margin: 2rem 0;
+  }
+
   @media only screen and (min-width: 768px) {
-    height: ${(props) => props.height};
+    min-height: ${(props) => props.height};
+    max-height: 60vh;
   }
 `;
