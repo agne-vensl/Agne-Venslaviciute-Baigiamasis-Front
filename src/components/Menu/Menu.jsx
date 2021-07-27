@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { cloneElement, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import ModalContainer from '../ModalContainer/ModalContainer';
@@ -26,7 +26,8 @@ const Menu = ({ routes }) => {
           ))}
       </S.Menu>
       <ModalContainer isOpen={modalOpen} closeModal={() => setModalOpen(false)}>
-        {modalChild}
+        {modalChild &&
+          cloneElement(modalChild, { closeModal: () => setModalOpen(false) })}
       </ModalContainer>
     </>
   );
