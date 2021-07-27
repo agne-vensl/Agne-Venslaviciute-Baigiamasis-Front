@@ -18,12 +18,17 @@ const WebsocketProvider = ({ children }) => {
     }
   };
 
-  const displayOutput = (windowId, line) => {
+  const displayOutput = (windowId, line, onNewLine = true) => {
     const window = document.getElementById(windowId);
     let element;
 
     if (line) {
-      element = document.createElement('div');
+      if (onNewLine) {
+        element = document.createElement('div');
+      } else {
+        element = document.createElement('span');
+      }
+
       element.textContent = line;
     } else {
       element = document.createElement('br');
@@ -78,7 +83,7 @@ const WebsocketProvider = ({ children }) => {
     // because the server is likely waiting for user input
     setTimeout(() => {
       if (!incoming && buffer) {
-        displayOutput(window, buffer);
+        displayOutput(window, buffer, false);
       }
     }, 50);
   };

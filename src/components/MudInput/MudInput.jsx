@@ -15,7 +15,7 @@ const MudInput = ({ windowId }) => {
     Context.sendInput(input);
 
     if (!Context.hideUserInput) {
-      Context.displayOutput(windowId, input);
+      Context.displayOutput(windowId, input, false);
     }
 
     e.target.children[0].value = '';
