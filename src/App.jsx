@@ -1,9 +1,19 @@
 import React, { useContext, useEffect } from 'react';
 
-import { MudInput, Window } from './components';
+import { VscAccount } from 'react-icons/vsc';
+
+import { Menu, MudInput, Window } from './components';
 import { WebsocketContext } from './contexts/WebsocketContext';
 
 const mainWindow = 'main-window-parent';
+
+const modalRoutes = [
+  {
+    name: 'Login / Register',
+    component: <h1>Hello</h1>,
+    icon: <VscAccount />,
+  },
+];
 
 const App = () => {
   const Context = useContext(WebsocketContext);
@@ -19,6 +29,8 @@ const App = () => {
 
   return (
     <div id="screen" style={{ display: 'flex', height: '100vh' }}>
+      <Menu routes={modalRoutes} />
+
       <div
         style={{
           height: '100%',
