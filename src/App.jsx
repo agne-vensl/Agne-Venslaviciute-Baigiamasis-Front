@@ -1,38 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 
-import { Window } from './components';
-import { displayOutput, parseData } from './utils/parser';
+import { MudInput, Window } from './components';
+import { WebsocketContext } from './contexts/WebsocketContext';
+
+const mainWindow = 'main-window-parent';
 
 const App = () => {
+  const Context = useContext(WebsocketContext);
+
   useEffect(() => {
-    const window = document.getElementById('main-window-parent');
-
-    const connect = () => new WebSocket(process.env.REACT_APP_URL);
-
-    let socket = connect();
-    socket.binaryType = 'arraybuffer';
-
-    socket.addEventListener('open', () => {
-      displayOutput(window, '<=== Connected to server ===>');
-      displayOutput(window);
-    });
-
-    socket.addEventListener('close', () => {
-      displayOutput(window);
-      displayOutput(window, '<=== Disconnected from server ===>');
-      socket = connect();
-    });
-
-    socket.addEventListener('error', (event) => {
-      console.log(event);
-    });
-
-    socket.addEventListener('message', async (event) => {
-      // console.log(event.data);
-      const chars = Array.from(new Uint8Array(event.data));
-
-      parseData(socket, window, chars);
-    });
+    Context.connect(mainWindow);
   }, []);
 
   return (
@@ -47,6 +24,7 @@ const App = () => {
       >
         <Window id="chat-window" height="25%" />
         <Window id="main-window" style={{ flex: '1' }} />
+        <MudInput windowId={mainWindow} />
       </div>
     </div>
   );
