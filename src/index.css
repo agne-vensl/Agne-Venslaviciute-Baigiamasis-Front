@@ -14,3 +14,20 @@
   font-family: Consolas, Courier, 'Courier New', 'Andale Mono', Monaco,
     monospace;
 }
+
+.align-center {
+  text-align: center;
+}
+
+.fake-link {
+  background: transparent;
+  border: 0;
+  color: #eee;
+  cursor: pointer;
+  display: inline;
+  outline: none;
+}
+
+.fake-link:hover {
+  text-decoration: underline;
+}
