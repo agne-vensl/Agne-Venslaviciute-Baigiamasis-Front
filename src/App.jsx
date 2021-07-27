@@ -5,12 +5,14 @@ import { VscAccount } from 'react-icons/vsc';
 import { Menu, MudInput, Window } from './components';
 import { WebsocketContext } from './contexts/WebsocketContext';
 
+import Auth from './pages/Auth/Auth';
+
 const mainWindow = 'main-window-parent';
 
 const modalRoutes = [
   {
     name: 'Login / Register',
-    component: <h1>Hello</h1>,
+    component: <Auth />,
     icon: <VscAccount />,
   },
 ];
