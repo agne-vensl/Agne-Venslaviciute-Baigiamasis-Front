@@ -9,7 +9,12 @@ const App = () => {
   const Context = useContext(WebsocketContext);
 
   useEffect(() => {
-    Context.connect(mainWindow);
+    if (
+      Context.websocket?.readyState !== 0 &&
+      Context.websocket?.readyState !== 1
+    ) {
+      Context.connect(mainWindow);
+    }
   }, []);
 
   return (
