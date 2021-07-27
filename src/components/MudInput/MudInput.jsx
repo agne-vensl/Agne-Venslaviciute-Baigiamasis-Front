@@ -13,15 +13,27 @@ const MudInput = ({ windowId }) => {
     e.preventDefault();
 
     Context.sendInput(input);
-    Context.displayOutput(windowId, input);
+
+    if (!Context.hideUserInput) {
+      Context.displayOutput(windowId, input);
+    }
 
     e.target.children[0].value = '';
     setInput('');
   };
 
+  const updateInput = (e) => {
+    if (Context.hideUserInput) {
+      setInput(input + e.target.value);
+      e.target.value = '';
+    } else {
+      setInput(e.target.value);
+    }
+  };
+
   return (
     <S.InputContainer onSubmit={submit}>
-      <S.Input onChange={(e) => setInput(e.target.value)} />
+      <S.Input onChange={updateInput} />
       <S.Button type="submit">Send</S.Button>
     </S.InputContainer>
   );

@@ -10,6 +10,7 @@ let buffer = '';
 
 const WebsocketProvider = ({ children }) => {
   const [websocket, setWebsocket] = useState();
+  const [hideUserInput, setHideUserInput] = useState(false);
 
   const sendInput = (input) => {
     if (websocket.readyState === 1) {
@@ -38,10 +39,12 @@ const WebsocketProvider = ({ children }) => {
 
     for (let i = 0; i < chars.length; i += 1) {
       incoming = true;
+      let option;
 
       // checks if a telnet negotiation code was received
       if (chars[i] === telnetCodes.IAC) {
         command = chars[i + 1];
+        option = chars[i + 2];
 
         if (
           command === telnetCodes.WILL ||
@@ -49,6 +52,13 @@ const WebsocketProvider = ({ children }) => {
           command === telnetCodes.DO ||
           command === telnetCodes.DONT
         ) {
+          if (command === 251 && option === 1) {
+            setHideUserInput(true);
+          }
+
+          if (command === 252 && option === 1) {
+            setHideUserInput(false);
+          }
           i += 3;
         }
       } else if (chars[i] === codes.CR) {
@@ -102,7 +112,14 @@ const WebsocketProvider = ({ children }) => {
 
   return (
     <WebsocketContext.Provider
-      value={{ displayOutput, parseData, connect, sendInput, websocket }}
+      value={{
+        displayOutput,
+        parseData,
+        connect,
+        sendInput,
+        websocket,
+        hideUserInput,
+      }}
     >
       {children}
     </WebsocketContext.Provider>
