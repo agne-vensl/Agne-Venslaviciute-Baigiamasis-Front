@@ -7,7 +7,7 @@ import * as S from './MudInput.style';
 
 const MudInput = ({ windowId }) => {
   const Context = useContext(WebsocketContext);
-  const [input, setInput] = useState();
+  const [input, setInput] = useState('');
 
   const submit = (e) => {
     e.preventDefault();
