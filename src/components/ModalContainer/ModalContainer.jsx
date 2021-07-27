@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 
@@ -23,7 +23,7 @@ const ModalContainer = ({ isOpen, closeModal, height, width, children }) => (
     )}
     parentSelector={() => document.querySelector('#modal-root')}
   >
-    {children}
+    {children && cloneElement(children, { closeModal })}
   </Modal>
 );
 
