@@ -12,6 +12,7 @@ export const WindowContainer = styled.div`
   padding-top: 0;
   width: ${(props) => props.width};
   word-wrap: break-word;
+  white-space: pre-wrap;
 
   &::-webkit-scrollbar {
     display: none;
