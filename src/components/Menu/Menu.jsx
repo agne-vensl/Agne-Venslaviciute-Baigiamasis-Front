@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { ModalContainer } from '..';
+import ModalContainer from '../ModalContainer/ModalContainer';
 
 import * as S from './Menu.style';
 
