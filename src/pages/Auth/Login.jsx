@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
-import { Button, Form } from '../../components';
+import { Button, Form, Notification } from '../../components';
 
 const Login = ({ closeModal }) => {
   const [formData] = useState({ email: '', password: '' });
+  const [notification, setNotification] = useState({});
 
   const login = (e) => {
     e.preventDefault();
@@ -17,12 +18,21 @@ const Login = ({ closeModal }) => {
       .then(() => {
         closeModal();
       })
-      .catch((er) => alert(er.message));
+      .catch((err) =>
+        setNotification({
+          message: err.message,
+        }),
+      ); // eslint-disable-line function-paren-newline
   };
 
   return (
     <Form handleSubmit={login}>
       <h1>Login</h1>
+
+      <Notification
+        notification={notification}
+        handleDelete={setNotification}
+      />
 
       <label htmlFor="email">
         Email
