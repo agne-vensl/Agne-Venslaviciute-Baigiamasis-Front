@@ -1,6 +1,20 @@
-# Getting Started with Create React App
+# New Web Client for Discworld MUD
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project has been created with the idea to replace [DecafMUD](http://discworld.starturtle.net/lpc/decafmud/web_client.html) as the default web client for Discworld MUD.
+
+Created using React, Firebase and Websockets.
+
+## Main objectives for the final product:
+
+* Allowing users to save their settings for use in any browser, on any computer
+* Creating the app with UI that is simple for new players to understand and has features older players would want
+
+
+Happy mudding! :computer:
+
+## Setup
+
+Create an .env file with your Firebase project setup + url to the server e.g. REACT_APP_URL=ws://discworld.starturtle.net:4243/
 
 ## Available Scripts
 
